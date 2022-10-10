@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		C47A560D28F4362A0017C3EB /* Data+ToHexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47A560C28F4362A0017C3EB /* Data+ToHexString.swift */; };
+		C47A561528F443A50017C3EB /* tweetnacl.c in Sources */ = {isa = PBXBuildFile; fileRef = C47A561328F443A40017C3EB /* tweetnacl.c */; };
+		C47A561728F44E5A0017C3EB /* TweetNacl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47A561628F44E5A0017C3EB /* TweetNacl.swift */; };
+		C47A561A28F465880017C3EB /* KeyPair.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47A561928F465880017C3EB /* KeyPair.swift */; };
+		C47A561C28F465990017C3EB /* TweetNaclError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47A561B28F465990017C3EB /* TweetNaclError.swift */; };
 		C4CFE04B28ED553400179930 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CFE04A28ED553400179930 /* AppDelegate.swift */; };
 		C4CFE04F28ED553400179930 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CFE04E28ED553400179930 /* ViewController.swift */; };
 		C4CFE05428ED553700179930 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4CFE05328ED553700179930 /* Assets.xcassets */; };
@@ -21,6 +25,12 @@
 
 /* Begin PBXFileReference section */
 		C47A560C28F4362A0017C3EB /* Data+ToHexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+ToHexString.swift"; sourceTree = "<group>"; };
+		C47A561228F443A40017C3EB /* mnemonic-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "mnemonic-Bridging-Header.h"; sourceTree = "<group>"; };
+		C47A561328F443A40017C3EB /* tweetnacl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tweetnacl.c; sourceTree = "<group>"; };
+		C47A561428F443A40017C3EB /* tweetnacl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tweetnacl.h; sourceTree = "<group>"; };
+		C47A561628F44E5A0017C3EB /* TweetNacl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetNacl.swift; sourceTree = "<group>"; };
+		C47A561928F465880017C3EB /* KeyPair.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyPair.swift; sourceTree = "<group>"; };
+		C47A561B28F465990017C3EB /* TweetNaclError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TweetNaclError.swift; sourceTree = "<group>"; };
 		C4CFE04728ED553400179930 /* mnemonic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mnemonic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CFE04A28ED553400179930 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4CFE04E28ED553400179930 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +71,34 @@
 			path = Foundation;
 			sourceTree = "<group>";
 		};
+		C47A560E28F4432F0017C3EB /* Tweetnacl */ = {
+			isa = PBXGroup;
+			children = (
+				C47A561628F44E5A0017C3EB /* TweetNacl.swift */,
+				C47A561828F4657F0017C3EB /* Model */,
+				C47A561128F4432F0017C3EB /* tweetnacl */,
+			);
+			path = Tweetnacl;
+			sourceTree = "<group>";
+		};
+		C47A561128F4432F0017C3EB /* tweetnacl */ = {
+			isa = PBXGroup;
+			children = (
+				C47A561328F443A40017C3EB /* tweetnacl.c */,
+				C47A561428F443A40017C3EB /* tweetnacl.h */,
+			);
+			path = tweetnacl;
+			sourceTree = "<group>";
+		};
+		C47A561828F4657F0017C3EB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C47A561928F465880017C3EB /* KeyPair.swift */,
+				C47A561B28F465990017C3EB /* TweetNaclError.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		C4CFE03E28ED553400179930 = {
 			isa = PBXGroup;
 			children = (
@@ -93,10 +131,12 @@
 		C4CFE05E28ED5A2300179930 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				C47A560A28F436000017C3EB /* Extension */,
-				C4D67F4F28F1AF2D00524435 /* Primitives */,
+				C47A561228F443A40017C3EB /* mnemonic-Bridging-Header.h */,
 				C4CFE06528ED5A2300179930 /* Mnemonic.swift */,
+				C47A560A28F436000017C3EB /* Extension */,
 				C4CFE06128ED5A2300179930 /* Language */,
+				C4D67F4F28F1AF2D00524435 /* Primitives */,
+				C47A560E28F4432F0017C3EB /* Tweetnacl */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -151,6 +191,7 @@
 				TargetAttributes = {
 					C4CFE04628ED553400179930 = {
 						CreatedOnToolsVersion = 14.0.1;
+						LastSwiftMigration = 1400;
 					};
 				};
 			};
@@ -191,11 +232,15 @@
 			files = (
 				C4D67F5128F1AF3B00524435 /* hmacSha512.swift in Sources */,
 				C4CFE04F28ED553400179930 /* ViewController.swift in Sources */,
+				C47A561A28F465880017C3EB /* KeyPair.swift in Sources */,
 				C4CFE04B28ED553400179930 /* AppDelegate.swift in Sources */,
+				C47A561728F44E5A0017C3EB /* TweetNacl.swift in Sources */,
 				C4CFE06B28ED5A2300179930 /* English.swift in Sources */,
 				C47A560D28F4362A0017C3EB /* Data+ToHexString.swift in Sources */,
 				C4CFE06A28ED5A2300179930 /* Chinese.swift in Sources */,
+				C47A561C28F465990017C3EB /* TweetNaclError.swift in Sources */,
 				C4CFE06D28ED5A2300179930 /* Mnemonic.swift in Sources */,
+				C47A561528F443A50017C3EB /* tweetnacl.c in Sources */,
 				C4D67F5328F1AF6E00524435 /* pbkdf2Sha512.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -333,6 +378,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZDQ89335V8;
@@ -351,6 +397,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.kotov.mnemonic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "mnemonic/Source/mnemonic-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -361,6 +409,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = ZDQ89335V8;
@@ -379,6 +428,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ru.kotov.mnemonic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "mnemonic/Source/mnemonic-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

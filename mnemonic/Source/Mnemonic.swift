@@ -129,4 +129,24 @@ enum Mnemonic {
         return src.map({ $0.lowercased() })
     }
     
+    /**
+     Extract private key from mnemonic
+     
+     - Parameter mnemonicArray: mnemonic array
+     - Parameter password: mnemonic password
+     - returns: KeyPair
+     */
+    static func mnemonicToPrivateKey(mnemonicArray: [String], password: String) throws -> KeyPair {
+        let mnemonicArray = normalizeMnemonic(src: mnemonicArray)
+        let seed = mnemonicToSeed(mnemonicArray: mnemonicArray, password: password)[0..<32]
+        
+        do {
+            let keyPair = try TweetNacl.keyPair(secretKey: seed)
+            return keyPair
+            
+        } catch {
+            throw error
+        }
+    }
+    
 }

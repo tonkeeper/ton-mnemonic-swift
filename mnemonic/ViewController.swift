@@ -46,17 +46,24 @@ final class ViewController: UIViewController {
         
         view.addSubview(rootStack)
         
-        rootStack.addArrangedSubview(generatePrivateKeyButton)
         rootStack.addArrangedSubview(generateMnemonicButton)
         rootStack.addArrangedSubview(validateMnemonicButton)
+        rootStack.addArrangedSubview(generatePrivateKeyButton)
         
         generateMnemonicButton.addTarget(self, action: #selector(generateMnemonic), for: .touchUpInside)
         validateMnemonicButton.addTarget(self, action: #selector(validateMnemonic), for: .touchUpInside)
+        generatePrivateKeyButton.addTarget(self, action: #selector(generateKeys), for: .touchUpInside)
         
         NSLayoutConstraint.activate([
             rootStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             rootStack.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
+    }
+    
+    @objc private func generateKeys() {
+        let privateKey = try? Mnemonic.mnemonicToPrivateKey(mnemonicArray: mnemonic.components(separatedBy: " "), password: "")
+        print("privateKey.publicKey", privateKey?.publicKey.hexString())
+        print("privateKey.secretKey", privateKey?.secretKey.hexString())
     }
     
     @objc private func generateMnemonic() {
