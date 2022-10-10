@@ -1,21 +1,17 @@
 import Foundation
-import CommonCrypto
 
-public enum MnemonicError: Error {
-    case wrongWordCount
-    case checksumError
-    case invalidWord(word: String)
-    case unsupportedLanguage
-    case invalidHexstring
-    case invalidBitString
-    case invalidInput
-    case entropyCreationFailed
-}
-
-public enum Mnemonic {
-    static func generateMnemonic(wordsCount: Int, password: String) -> String {
+enum Mnemonic {
+    static let words = String.englishMnemonics
+    
+    /**
+     Generate new mnemonic
+     
+     - Parameter wordsCount: number of words to generate
+     - Parameter password: mnemonic password
+     - returns: mnemonic string
+     */
+    static func mnemonicNew(wordsCount: Int, password: String) -> String {
         var mnemonicArray: [String] = []
-        let words = String.englishMnemonics
         
         while true {
             mnemonicArray = []
@@ -24,60 +20,113 @@ public enum Mnemonic {
                 mnemonicArray.append(words[rnd[i] % (words.count - 1)])
             }
             
-            let entropy = mnemonicToEntropy(mnemonicArray: mnemonicArray, password: password)
-            if let isBasicSeed = try? isBasicSeed(entropy: entropy), !isBasicSeed {
+            if password.count > 0 {
+                if !isPasswordNeeded(mnemonicArray: mnemonicArray) {
+                    continue
+                }
+            }
+            
+            if !isBasicSeed(entropy: mnemonicToEntropy(mnemonicArray: mnemonicArray, password: password)) {
                 continue
             }
             
             break
         }
-
+        
         return mnemonicArray.joined(separator: " ")
     }
     
-    private static func isBasicSeed(entropy: Data) throws -> Bool {
-        let salt = "TON seed version"
-        let saltData = try Mnemonic.normalizedString(salt)
-        let seed = try PKCS5.PBKDF2SHA512(phrase: entropy.map({ Int8(bitPattern: $0) }),
-                                          salt: [UInt8](saltData),
-                                          iterations: max(1, PKCS5.iterations / 256))
-        return seed[0] == 0
-    }
-    
-    private static func mnemonicToEntropy(mnemonicArray: [String], password: String) -> Data {
-        let mnemonicPhrase = mnemonicArray.joined(separator: " ")
-        return hmacSha512(phrase: mnemonicPhrase, password: password)
-    }
-    
-    private static func hmacSha512(phrase: String, password: String) -> Data {
-        let count = Int(CC_SHA256_DIGEST_LENGTH)
-        var digest = [UInt8](repeating: 0, count: count)
-        CCHmac(CCHmacAlgorithm(kCCHmacAlgSHA256),
-               password,
-               password.count,
-               phrase,
-               phrase.count,
-               &digest)
+    /**
+     Validate Mnemonic
+     
+     - Parameter mnemonicArray: mnemonic array
+     - Parameter password: mnemonic password
+     - returns: true for valid mnemonic
+     */
+    static func mnemonicValidate(mnemonicArray: [String], password: String) -> Bool {
+        let mnemonicArray = normalizeMnemonic(src: mnemonicArray)
         
-        return Data(bytes: digest, count: count)
-    }
-    
-    private static func hmacSha512String(phrase: String, password: String) -> String {
-        return hmacSha512(phrase: phrase, password: password).map { String(format: "%02hhx", $0) }.joined()
-    }
-    
-    private static func hmacSha512String(data: Data) -> String {
-        return data.map { String(format: "%02hhx", $0) }.joined()
-    }
- 
-    private static func normalizedString(_ string: String) throws -> Data {
-        guard let data = string.data(using: .utf8, allowLossyConversion: true),
-              let dataString = String(data: data, encoding: .utf8),
-              let normalizedData = dataString.data(using: .utf8, allowLossyConversion: false)
-        else {
-            throw MnemonicError.invalidInput
+        for word in mnemonicArray {
+            if !words.contains(word) {
+                return false
+            }
         }
         
-        return normalizedData
+        if password.count > 0 {
+            if !isPasswordNeeded(mnemonicArray: mnemonicArray) {
+                return false
+            }
+        }
+        
+        return isBasicSeed(entropy: mnemonicToEntropy(mnemonicArray: mnemonicArray, password: password))
     }
+    
+    /**
+     Convert mnemonic to entropy
+     
+     - Parameter mnemonicArray: mnemonic array
+     - Parameter password: mnemonic password
+     - returns: 64 byte entropy
+     */
+    static func mnemonicToEntropy(mnemonicArray: [String], password: String) -> Data {
+        return hmacSha512(phrase: mnemonicArray.joined(separator: " "), password: password)
+    }
+    
+    /**
+     Convert mnemonic to seed
+     
+     - Parameter mnemonicArray: mnemonic array
+     - Parameter password: mnemonic password
+     - returns: 64 byte seed
+     */
+    static func mnemonicToSeed(mnemonicArray: [String], password: String) -> Data {
+        let entropy = mnemonicToEntropy(mnemonicArray: mnemonicArray, password: password)
+        
+        let salt = "TON default seed"
+        let saltData = Data(salt.utf8)
+        
+        return Data(pbkdf2Sha512(phrase: entropy, salt: saltData))
+    }
+    
+    /**
+     Convert mnemonic to HD seed
+     
+     - Parameter mnemonicArray: mnemonic array
+     - Parameter password: mnemonic password
+     - returns: 64 byte seed
+     */
+    static func mnemonicToHDSeed(mnemonicArray: [String], password: String) -> Data {
+        let entropy = mnemonicToEntropy(mnemonicArray: mnemonicArray, password: password)
+        
+        let salt = "TON HD Keys seed"
+        let saltData = Data(salt.utf8)
+        
+        return Data(pbkdf2Sha512(phrase: entropy, salt: saltData))
+    }
+    
+    static func isPasswordNeeded(mnemonicArray: [String]) -> Bool {
+        let passlessEntropy = mnemonicToEntropy(mnemonicArray: mnemonicArray, password: "")
+        return isPasswordSeed(entropy: passlessEntropy) && !isBasicSeed(entropy: passlessEntropy)
+    }
+    
+    static func isBasicSeed(entropy: Data) -> Bool {
+        let salt = "TON seed version"
+        let saltData = Data(salt.utf8)
+        let seed = pbkdf2Sha512(phrase: entropy, salt: saltData, iterations: max(1, pbkdf2Sha512Iterations / 256))
+        
+        return seed[0] == 0
+    }
+        
+    static func isPasswordSeed(entropy: Data) -> Bool {
+        let salt = "TON fast seed version"
+        let saltData = Data(salt.utf8)
+        let seed = pbkdf2Sha512(phrase: entropy, salt: saltData, iterations: 1)
+        
+        return seed[0] == 1
+    }
+    
+    static func normalizeMnemonic(src: [String]) -> [String] {
+        return src.map({ $0.lowercased() })
+    }
+    
 }

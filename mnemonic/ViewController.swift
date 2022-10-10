@@ -37,7 +37,7 @@ final class ViewController: UIViewController {
         return stackView
     }()
     
-    private let words = "source solution nurse sauce that often wheat top penalty picture sense finish engine parent such surge retire aware produce caught chronic extra bomb sport"
+    private var mnemonic = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,29 +60,14 @@ final class ViewController: UIViewController {
     }
     
     @objc private func generateMnemonic() {
-        do {
-            let mnemonic = try Mnemonic.generateMnemonic(wordsCount: 24, password: "")
-            print("Mnemonic: \(mnemonic)")
-        } catch {
-            print("Generate mnemonic error \(error.localizedDescription)")
-            logError(error: error)
-        }
+        let mnemonic =  Mnemonic.mnemonicNew(wordsCount: 24, password: "")
+        self.mnemonic = mnemonic
+        print("Mnemonic: \(mnemonic)")
     }
     
     @objc private func validateMnemonic() {
-        do {
-//            try Mnemonic.validate(mnemonic: words)
-            print("Mnemonic validated")
-        } catch {
-            print("Validate mnemonic error \(error.localizedDescription)")
-            logError(error: error)
-        }
-    }
-    
-    private func logError(error: Error) {
-        if let error = error as? MnemonicError {
-            print(error)
-        }
+        let valid = Mnemonic.mnemonicValidate(mnemonicArray: mnemonic.components(separatedBy: " "), password: "")
+        print("Mnemonic validated:", valid)
     }
 
 }

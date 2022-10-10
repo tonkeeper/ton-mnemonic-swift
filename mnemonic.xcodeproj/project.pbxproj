@@ -7,31 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C47A560D28F4362A0017C3EB /* Data+ToHexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47A560C28F4362A0017C3EB /* Data+ToHexString.swift */; };
 		C4CFE04B28ED553400179930 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CFE04A28ED553400179930 /* AppDelegate.swift */; };
 		C4CFE04F28ED553400179930 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CFE04E28ED553400179930 /* ViewController.swift */; };
 		C4CFE05428ED553700179930 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4CFE05328ED553700179930 /* Assets.xcassets */; };
 		C4CFE05728ED553700179930 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4CFE05528ED553700179930 /* LaunchScreen.storyboard */; };
-		C4CFE06828ED5A2300179930 /* String+MnemonicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CFE05F28ED5A2300179930 /* String+MnemonicData.swift */; };
-		C4CFE06928ED5A2300179930 /* Data+BitArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CFE06028ED5A2300179930 /* Data+BitArray.swift */; };
 		C4CFE06A28ED5A2300179930 /* Chinese.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CFE06228ED5A2300179930 /* Chinese.swift */; };
 		C4CFE06B28ED5A2300179930 /* English.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CFE06328ED5A2300179930 /* English.swift */; };
-		C4CFE06C28ED5A2300179930 /* PKC5.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CFE06428ED5A2300179930 /* PKC5.swift */; };
 		C4CFE06D28ED5A2300179930 /* Mnemonic.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CFE06528ED5A2300179930 /* Mnemonic.swift */; };
+		C4D67F5128F1AF3B00524435 /* hmacSha512.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D67F5028F1AF3B00524435 /* hmacSha512.swift */; };
+		C4D67F5328F1AF6E00524435 /* pbkdf2Sha512.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D67F5228F1AF6E00524435 /* pbkdf2Sha512.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C47A560C28F4362A0017C3EB /* Data+ToHexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+ToHexString.swift"; sourceTree = "<group>"; };
 		C4CFE04728ED553400179930 /* mnemonic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mnemonic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4CFE04A28ED553400179930 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4CFE04E28ED553400179930 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C4CFE05328ED553700179930 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4CFE05628ED553700179930 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C4CFE05828ED553700179930 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C4CFE05F28ED5A2300179930 /* String+MnemonicData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+MnemonicData.swift"; sourceTree = "<group>"; };
-		C4CFE06028ED5A2300179930 /* Data+BitArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+BitArray.swift"; sourceTree = "<group>"; };
 		C4CFE06228ED5A2300179930 /* Chinese.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chinese.swift; sourceTree = "<group>"; };
 		C4CFE06328ED5A2300179930 /* English.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = English.swift; sourceTree = "<group>"; };
-		C4CFE06428ED5A2300179930 /* PKC5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKC5.swift; sourceTree = "<group>"; };
 		C4CFE06528ED5A2300179930 /* Mnemonic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mnemonic.swift; sourceTree = "<group>"; };
+		C4D67F5028F1AF3B00524435 /* hmacSha512.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hmacSha512.swift; sourceTree = "<group>"; };
+		C4D67F5228F1AF6E00524435 /* pbkdf2Sha512.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pbkdf2Sha512.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +45,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C47A560A28F436000017C3EB /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				C47A560B28F4361B0017C3EB /* Foundation */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		C47A560B28F4361B0017C3EB /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				C47A560C28F4362A0017C3EB /* Data+ToHexString.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
 		C4CFE03E28ED553400179930 = {
 			isa = PBXGroup;
 			children = (
@@ -77,10 +93,9 @@
 		C4CFE05E28ED5A2300179930 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				C4CFE06028ED5A2300179930 /* Data+BitArray.swift */,
+				C47A560A28F436000017C3EB /* Extension */,
+				C4D67F4F28F1AF2D00524435 /* Primitives */,
 				C4CFE06528ED5A2300179930 /* Mnemonic.swift */,
-				C4CFE06428ED5A2300179930 /* PKC5.swift */,
-				C4CFE05F28ED5A2300179930 /* String+MnemonicData.swift */,
 				C4CFE06128ED5A2300179930 /* Language */,
 			);
 			path = Source;
@@ -93,6 +108,15 @@
 				C4CFE06228ED5A2300179930 /* Chinese.swift */,
 			);
 			path = Language;
+			sourceTree = "<group>";
+		};
+		C4D67F4F28F1AF2D00524435 /* Primitives */ = {
+			isa = PBXGroup;
+			children = (
+				C4D67F5028F1AF3B00524435 /* hmacSha512.swift */,
+				C4D67F5228F1AF6E00524435 /* pbkdf2Sha512.swift */,
+			);
+			path = Primitives;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,14 +189,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C4D67F5128F1AF3B00524435 /* hmacSha512.swift in Sources */,
 				C4CFE04F28ED553400179930 /* ViewController.swift in Sources */,
-				C4CFE06928ED5A2300179930 /* Data+BitArray.swift in Sources */,
 				C4CFE04B28ED553400179930 /* AppDelegate.swift in Sources */,
-				C4CFE06C28ED5A2300179930 /* PKC5.swift in Sources */,
-				C4CFE06828ED5A2300179930 /* String+MnemonicData.swift in Sources */,
 				C4CFE06B28ED5A2300179930 /* English.swift in Sources */,
+				C47A560D28F4362A0017C3EB /* Data+ToHexString.swift in Sources */,
 				C4CFE06A28ED5A2300179930 /* Chinese.swift in Sources */,
 				C4CFE06D28ED5A2300179930 /* Mnemonic.swift in Sources */,
+				C4D67F5328F1AF6E00524435 /* pbkdf2Sha512.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
