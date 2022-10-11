@@ -1,10 +1,10 @@
 import Foundation
 
-enum TweetNacl {
-    static let publicKeyLength = 32
-    static let secretKeyLength = 32
+public enum TweetNacl {
+    public static let publicKeyLength = 32
+    public static let secretKeyLength = 32
     
-    static func keyPair(secretKey: Data) throws -> KeyPair {
+    public static func keyPair(secretKey: Data) throws -> KeyPair {
         guard secretKey.count == secretKeyLength else {
             throw TweetNaclError.invalidSecretKey
         }

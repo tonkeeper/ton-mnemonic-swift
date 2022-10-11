@@ -1,11 +1,11 @@
 import Foundation
 
-enum TweetNaclError: LocalizedError {
+public enum TweetNaclError: LocalizedError {
     case invalidSecretKey
     case invalidPublicKey
     case unknown(String)
     
-    var errorDescription: String {
+    public var errorDescription: String {
         switch self {
         case .invalidSecretKey: return "Wrong SecretKey length"
         case .invalidPublicKey: return "Wrong PublicKey length"
@@ -13,7 +13,7 @@ enum TweetNaclError: LocalizedError {
         }
     }
     
-    var recoverySuggestion: String {
+    public var recoverySuggestion: String {
         switch self {
         case .invalidSecretKey: return "Check SecretKey length"
         case .invalidPublicKey: return "Check PublicKey length"
@@ -21,7 +21,7 @@ enum TweetNaclError: LocalizedError {
         }
     }
     
-    var localizedDescription: String {
+    public var localizedDescription: String {
         return "\(self.errorDescription). Recovery: \(self.recoverySuggestion)"
     }
 }

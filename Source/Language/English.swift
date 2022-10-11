@@ -1,7 +1,7 @@
 import Foundation
 
 extension String {
-  static let englishMnemonics: [String] = [
+    public static let englishMnemonics: [String] = [
     "abandon",
     "ability",
     "able",

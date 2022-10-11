@@ -1,0 +1,6 @@
+use_frameworks!
+
+target 'mnemonic' do
+  pod 'TonMnemonicSwift', :path => '../'
+  
+end

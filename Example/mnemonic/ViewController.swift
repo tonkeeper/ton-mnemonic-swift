@@ -1,4 +1,5 @@
 import UIKit
+import TonMnemonicSwift
 
 final class ViewController: UIViewController {
     
@@ -61,9 +62,12 @@ final class ViewController: UIViewController {
     }
     
     @objc private func generateKeys() {
-        let privateKey = try? Mnemonic.mnemonicToPrivateKey(mnemonicArray: mnemonic.components(separatedBy: " "), password: "")
-        print("privateKey.publicKey", privateKey?.publicKey.hexString())
-        print("privateKey.secretKey", privateKey?.secretKey.hexString())
+        let mnemonicArray = mnemonic.components(separatedBy: " ")
+        guard let privateKey = try? Mnemonic.mnemonicToPrivateKey(mnemonicArray: mnemonicArray, password: "") else {
+            return
+        }
+        print("privateKey.publicKey", privateKey.publicKey.hexString())
+        print("privateKey.secretKey", privateKey.secretKey.hexString())
     }
     
     @objc private func generateMnemonic() {

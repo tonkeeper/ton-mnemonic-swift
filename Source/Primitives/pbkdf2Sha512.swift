@@ -1,9 +1,9 @@
 import Foundation
 import CommonCrypto
 
-let pbkdf2Sha512Iterations = 100000
+public let pbkdf2Sha512Iterations = 100000
 
-func pbkdf2Sha512(phrase: Data, salt: Data, iterations: Int = pbkdf2Sha512Iterations, keyLength: Int = 64) -> [UInt8] {
+public func pbkdf2Sha512(phrase: Data, salt: Data, iterations: Int = pbkdf2Sha512Iterations, keyLength: Int = 64) -> [UInt8] {
     var bytes = [UInt8](repeating: 0, count: keyLength)
     
     _ = bytes.withUnsafeMutableBytes { (outputBytes: UnsafeMutableRawBufferPointer) in

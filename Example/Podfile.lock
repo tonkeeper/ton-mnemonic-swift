@@ -1,0 +1,16 @@
+PODS:
+  - TonMnemonicSwift (0.0.1)
+
+DEPENDENCIES:
+  - TonMnemonicSwift (from `../`)
+
+EXTERNAL SOURCES:
+  TonMnemonicSwift:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  TonMnemonicSwift: 372b167642d943f324ba220a031437a2ebab8a6d
+
+PODFILE CHECKSUM: ce9c5e3c4570bb1ba78cbecc859e63e69a394980
+
+COCOAPODS: 1.11.3

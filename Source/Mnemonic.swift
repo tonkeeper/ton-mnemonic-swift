@@ -1,7 +1,7 @@
 import Foundation
 
-enum Mnemonic {
-    static let words = String.englishMnemonics
+public enum Mnemonic {
+    public static let words = String.englishMnemonics
     
     /**
      Generate new mnemonic
@@ -10,7 +10,7 @@ enum Mnemonic {
      - Parameter password: mnemonic password
      - returns: mnemonic string
      */
-    static func mnemonicNew(wordsCount: Int, password: String) -> String {
+    public static func mnemonicNew(wordsCount: Int, password: String) -> String {
         var mnemonicArray: [String] = []
         
         while true {
@@ -43,7 +43,7 @@ enum Mnemonic {
      - Parameter password: mnemonic password
      - returns: true for valid mnemonic
      */
-    static func mnemonicValidate(mnemonicArray: [String], password: String) -> Bool {
+    public static func mnemonicValidate(mnemonicArray: [String], password: String) -> Bool {
         let mnemonicArray = normalizeMnemonic(src: mnemonicArray)
         
         for word in mnemonicArray {
@@ -68,7 +68,7 @@ enum Mnemonic {
      - Parameter password: mnemonic password
      - returns: 64 byte entropy
      */
-    static func mnemonicToEntropy(mnemonicArray: [String], password: String) -> Data {
+    public static func mnemonicToEntropy(mnemonicArray: [String], password: String) -> Data {
         return hmacSha512(phrase: mnemonicArray.joined(separator: " "), password: password)
     }
     
@@ -79,7 +79,7 @@ enum Mnemonic {
      - Parameter password: mnemonic password
      - returns: 64 byte seed
      */
-    static func mnemonicToSeed(mnemonicArray: [String], password: String) -> Data {
+    public static func mnemonicToSeed(mnemonicArray: [String], password: String) -> Data {
         let entropy = mnemonicToEntropy(mnemonicArray: mnemonicArray, password: password)
         
         let salt = "TON default seed"
@@ -95,7 +95,7 @@ enum Mnemonic {
      - Parameter password: mnemonic password
      - returns: 64 byte seed
      */
-    static func mnemonicToHDSeed(mnemonicArray: [String], password: String) -> Data {
+    public static func mnemonicToHDSeed(mnemonicArray: [String], password: String) -> Data {
         let entropy = mnemonicToEntropy(mnemonicArray: mnemonicArray, password: password)
         
         let salt = "TON HD Keys seed"
@@ -104,12 +104,12 @@ enum Mnemonic {
         return Data(pbkdf2Sha512(phrase: entropy, salt: saltData))
     }
     
-    static func isPasswordNeeded(mnemonicArray: [String]) -> Bool {
+    public static func isPasswordNeeded(mnemonicArray: [String]) -> Bool {
         let passlessEntropy = mnemonicToEntropy(mnemonicArray: mnemonicArray, password: "")
         return isPasswordSeed(entropy: passlessEntropy) && !isBasicSeed(entropy: passlessEntropy)
     }
     
-    static func isBasicSeed(entropy: Data) -> Bool {
+    public static func isBasicSeed(entropy: Data) -> Bool {
         let salt = "TON seed version"
         let saltData = Data(salt.utf8)
         let seed = pbkdf2Sha512(phrase: entropy, salt: saltData, iterations: max(1, pbkdf2Sha512Iterations / 256))
@@ -117,7 +117,7 @@ enum Mnemonic {
         return seed[0] == 0
     }
         
-    static func isPasswordSeed(entropy: Data) -> Bool {
+    public static func isPasswordSeed(entropy: Data) -> Bool {
         let salt = "TON fast seed version"
         let saltData = Data(salt.utf8)
         let seed = pbkdf2Sha512(phrase: entropy, salt: saltData, iterations: 1)
@@ -125,7 +125,7 @@ enum Mnemonic {
         return seed[0] == 1
     }
     
-    static func normalizeMnemonic(src: [String]) -> [String] {
+    public static func normalizeMnemonic(src: [String]) -> [String] {
         return src.map({ $0.lowercased() })
     }
     
@@ -136,7 +136,7 @@ enum Mnemonic {
      - Parameter password: mnemonic password
      - returns: KeyPair
      */
-    static func mnemonicToPrivateKey(mnemonicArray: [String], password: String) throws -> KeyPair {
+    public static func mnemonicToPrivateKey(mnemonicArray: [String], password: String) throws -> KeyPair {
         let mnemonicArray = normalizeMnemonic(src: mnemonicArray)
         let seed = mnemonicToSeed(mnemonicArray: mnemonicArray, password: password)[0..<32]
         
