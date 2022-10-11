@@ -10,7 +10,7 @@ Ready for use on iOS 11+.
 [CocoaPods](https://cocoapods.org) is a dependency manager. For usage and installation instructions, visit their website. To integrate using CocoaPods, specify it in your `Podfile`:
 
 ```ruby
-pod 'TonMnemonicSwift'
+pod 'TonMnemonicSwift', :git => 'git@github.com:tonkeeper/ton-mnemonic-swift.git', :branch => 'main'
 ```
 
 ### Manually
