@@ -89,7 +89,5 @@ fastlane/test_output
 
 iOSInjectionProject/
 Example/Pods
-Example/mnemonic.xcodeproj
-Example/mnemonic.xcworkspace
-mnemonic.xcodeproj
-mnemonic.xcodeproj
+Example/mnemonic.xcodeproj/project.xcworkspace/xcshareddata
+Example/mnemonic.xcworkspace/xcshareddata
