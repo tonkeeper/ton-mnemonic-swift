@@ -670,7 +670,7 @@ int crypto_sign_keypair(u8 *pk, u8 *sk)
   scalarbase(p,d);
   pack(pk,p);
 
-  FOR(i,32) sk[32 + i] = pk[i];
+  //FOR(i,32) sk[32 + i] = pk[i];
   return 0;
 }
 
