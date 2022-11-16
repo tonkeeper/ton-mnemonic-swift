@@ -38,4 +38,4 @@ let keyPair = try Mnemonic.mnemonicToPrivateKey(mnemonicArray: mnemonicArray, pa
 Sergey Kotov, kotov@tonkeeper.com
 
 ## License
-TonMnemonicSwift is available under the MIT license. See the LICENSE file for more info.
+TonMnemonicSwift is available under the Apache-2.0 license. See the LICENSE file for more info.
