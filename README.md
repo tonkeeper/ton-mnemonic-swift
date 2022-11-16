@@ -35,7 +35,7 @@ let keyPair = try Mnemonic.mnemonicToPrivateKey(mnemonicArray: mnemonicArray, pa
 ```
 
 ## Author
-Sergey Kotov, thiskotov@yandex.ru
+Sergey Kotov, kotov@tonkeeper.com
 
 ## License
 ExtensionKit is available under the MIT license. See the LICENSE file for more info.
